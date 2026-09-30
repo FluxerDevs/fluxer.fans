@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+/*
+ * Palette follows fluxer.app: a night-sky indigo base, the Fluxer brand indigo for
+ * primary actions, and one warm "lamp" accent that carries the cozy part.
+ */
+@theme static {
+	--font-sans: 'Radio Canada Big', 'Noto Sans', system-ui, sans-serif;
+
+	--color-night-950: #05041a;
+	--color-night-900: #07061a;
+	--color-night-800: #0c0a28;
+	--color-night-700: #110d35;
+	--color-night-600: #15122f;
+	--color-night-500: #221d4d;
+
+	--color-brand: #4641d9;
+	--color-brand-hover: #635ee9;
+	--color-brand-light: #b0adff;
+
+	--color-lamp: #ffc46b;
+	--color-lamp-deep: #f29e3d;
+
+	--radius-control: 0.75rem;
+	--radius-card: 1rem;
+	--radius-sheet: 1.5rem;
+
+	--text-display: clamp(2.5rem, 1.2rem + 5.4vw, 4.75rem);
+	--text-display--line-height: 1.02;
+	--text-display--letter-spacing: -0.025em;
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+
+	body {
+		@apply bg-night-900 font-sans text-white antialiased;
+		/* Stars borrowed from the Fluxer night-sky look: two sparse layers over a vertical gradient. */
+		background-image:
+			radial-gradient(1px 1px at 12% 18%, #ffffffb3 50%, transparent 51%),
+			radial-gradient(1px 1px at 68% 8%, #ffffff99 50%, transparent 51%),
+			radial-gradient(1.5px 1.5px at 84% 42%, #ffffffa6 50%, transparent 51%),
+			radial-gradient(1px 1px at 32% 62%, #ffffff80 50%, transparent 51%),
+			radial-gradient(1.5px 1.5px at 52% 88%, #ffffff8c 50%, transparent 51%),
+			radial-gradient(1px 1px at 91% 76%, #ffffff73 50%, transparent 51%),
+			linear-gradient(to bottom, #07061a 0%, #0c0a28 45%, #110d35 100%);
+		background-size:
+			420px 420px,
+			420px 420px,
+			420px 420px,
+			420px 420px,
+			420px 420px,
+			420px 420px,
+			100% 100%;
+		background-attachment: fixed;
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--color-lamp);
+		outline-offset: 3px;
+	}
+
+	::selection {
+		background: var(--color-brand);
+		color: white;
+	}
+}
