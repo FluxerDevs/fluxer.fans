@@ -53,6 +53,13 @@
 				"pattern": "localhost:",
 				"uriFormat": "http://localhost:4173"
 			}
+		},
+		{
+			"name": "Update Fluxer reference source",
+			"type": "node-terminal",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"command": "pnpm fluxer:sync"
 		}
 	]
 }

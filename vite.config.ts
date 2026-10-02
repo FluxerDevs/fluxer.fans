@@ -28,6 +28,10 @@ export default defineConfig({
 			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale']
 		})
 	],
+	server: {
+		// Reference copies of Fluxer's source from `pnpm fluxer:sync`; not part of the app.
+		watch: { ignored: ['**/.fluxer-upstream/**', '**/fluxer-reference/**'] }
+	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
