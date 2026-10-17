@@ -62,6 +62,8 @@
 	"fine_title": "La letra no tan pequeña",
 	"fine_body": "fluxer.fans es un proyecto no oficial hecho por fans. No está afiliado, respaldado, patrocinado ni relacionado con Fluxer Platform AB ni con la plataforma Fluxer. El nombre Fluxer solo se usa para decir de qué app somos fans. Para lo de verdad, tu cuenta y soporte, ve a fluxer.app.",
 	"fine_privacy": "Sin cuentas, sin analíticas, sin rastreo. La única cookie recuerda tu idioma, y lo que escribas en la caja de ánimos se queda en tu navegador hasta que el ventilador se lo lleva.",
+	"more_body": "fluxer.fans no es mi único proyecto. El resto está en mi comunidad de Fluxer, así que pásate a saludar.",
+	"more_cta": "Ver mis otros proyectos",
 	"fine_built": "Hecho por fans, con SvelteKit y Threlte.",
 	"external_hint": "(abre fluxer.app)"
 }

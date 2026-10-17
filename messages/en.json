@@ -62,6 +62,8 @@
 	"fine_title": "The not-so-fine print",
 	"fine_body": "fluxer.fans is an unofficial, fan-made project. It is not affiliated with, endorsed by, sponsored by or connected to Fluxer Platform AB or the Fluxer platform. The Fluxer name is only used to say which app we're fans of. For the real thing, your account and support, go to fluxer.app.",
 	"fine_privacy": "No accounts, no analytics, no tracking. The only cookie remembers your language, and anything you type into the cheer box stays in your browser until the fan blows it away.",
+	"more_body": "fluxer.fans isn't my only project. The rest live in my Fluxer community, so come say hi.",
+	"more_cta": "See my other projects",
 	"fine_built": "Made by fans, with SvelteKit and Threlte.",
 	"external_hint": "(opens fluxer.app)"
 }
