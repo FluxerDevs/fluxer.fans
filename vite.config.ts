@@ -15,7 +15,8 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 
-			adapter: adapter()
+			// GitHub Pages serves 404.html for any path it can't find.
+			adapter: adapter({ fallback: '404.html' })
 		}),
 
 		paraglideVitePlugin({
