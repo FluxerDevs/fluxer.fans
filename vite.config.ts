@@ -1,9 +1,26 @@
-import { paraglideVitePlugin } from '@inlang/paraglide-js';
+﻿import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
+
+// Set when the site is served from a subpath, e.g. `/fluxer.fans` on <user>.github.io.
+const base = (process.env.BASE_PATH ?? '') as '' | `/${string}`;
+
+// Paraglide's default URL patterns expect the locale as the first path segment,
+// so a subpath has to be spelled out for it.
+const urlPatterns = base
+	? [
+			{
+				pattern: `:protocol://:domain(.*)::port?${base}/:path(.*)?`,
+				localized: [
+					['es', `:protocol://:domain(.*)::port?${base}/es/:path(.*)?`],
+					['en', `:protocol://:domain(.*)::port?${base}/:path(.*)?`]
+				] as [string, string][]
+			}
+		]
+	: undefined;
 
 export default defineConfig({
 	plugins: [
@@ -16,7 +33,8 @@ export default defineConfig({
 			},
 
 			// GitHub Pages serves 404.html for any path it can't find.
-			adapter: adapter({ fallback: '404.html' })
+			adapter: adapter({ fallback: '404.html' }),
+			paths: { base }
 		}),
 
 		paraglideVitePlugin({
@@ -24,7 +42,9 @@ export default defineConfig({
 			outdir: './src/lib/paraglide',
 			emitTsDeclarations: true,
 			// Locale comes from the URL only, so every page can be prerendered.
-			strategy: ['url', 'baseLocale']
+			strategy: ['url', 'baseLocale'],
+			urlPatterns,
+			trailingSlash: 'always'
 		})
 	],
 	server: {

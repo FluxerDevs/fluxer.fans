@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { Pathname } from '$app/types';
-	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import './layout.css';
@@ -25,6 +23,8 @@
 
 <div style="display:none">
 	{#each locales as locale (locale)}
-		<a href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}>{locale}</a>
+		<!-- eslint-disable svelte/no-navigation-without-resolve -- localizeHref output already includes the base path -->
+		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>
+		<!-- eslint-enable svelte/no-navigation-without-resolve -->
 	{/each}
 </div>

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Pathname } from '$app/types';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
@@ -7,7 +6,11 @@
 	import FanMark from './FanMark.svelte';
 	import LanguageSwitch from './LanguageSwitch.svelte';
 
-	const home = resolve(localizeHref('/', { locale: getLocale() as Locale }) as Pathname);
+	// localizeHref needs an absolute path that includes the base, and resolve() can return a
+	// relative one (e.g. `./`) while prerendering, so anchor it to the current URL first.
+	const home = localizeHref(new URL(resolve('/'), page.url).pathname, {
+		locale: getLocale() as Locale
+	});
 </script>
 
 <!-- Always-visible disclaimer, first thing on every page. -->
@@ -25,6 +28,7 @@
 </div>
 
 <header class="mx-auto flex max-w-7xl items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
+	<!-- eslint-disable svelte/no-navigation-without-resolve -- localizeHref output already includes the base path -->
 	<a
 		href={home}
 		aria-label={m.nav_home()}
@@ -34,6 +38,7 @@
 		<FanMark class="size-8 text-white" />
 		<span>fluxer<span class="text-brand-light">.fans</span></span>
 	</a>
+	<!-- eslint-enable svelte/no-navigation-without-resolve -->
 	<div class="ms-auto flex items-center gap-2 sm:gap-3">
 		<LanguageSwitch />
 		<a

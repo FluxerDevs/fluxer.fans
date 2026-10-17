@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { Pathname } from '$app/types';
-	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, locales, localizeHref, type Locale } from '$lib/paraglide/runtime';
@@ -14,8 +12,9 @@
 		{#each locales as locale (locale)}
 			<li>
 				<!-- Full reload so every message re-renders in the new language. -->
+				<!-- eslint-disable svelte/no-navigation-without-resolve -- localizeHref output already includes the base path -->
 				<a
-					href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}
+					href={localizeHref(page.url.pathname, { locale })}
 					hreflang={locale}
 					lang={locale}
 					data-sveltekit-reload
@@ -29,6 +28,7 @@
 					{locale}
 					<span class="sr-only">({names[locale]()})</span>
 				</a>
+				<!-- eslint-enable svelte/no-navigation-without-resolve -->
 			</li>
 		{/each}
 	</ul>
